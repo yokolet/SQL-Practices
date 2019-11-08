@@ -27,9 +27,12 @@ services:
     restart: "always"
     env_file:
       - "env/test/.env"
+    ports:
+      - "5432"
+
 
   dbtest:
     <<: *pipenv
-    command: ["bash", "-c", "pipenv install --dev --deploy --system && pytest -s"]
+    command: ["bash", "-c", "pipenv install --dev --deploy --system && pytest -s -vvv"]
     depends_on:
       - testdb

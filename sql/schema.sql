@@ -32,3 +32,8 @@ CREATE TABLE enterprise_sales_enterprise_customers (
         customer_organization_id
     )
 );
+
+CREATE TABLE japan_segments (
+    "id" character varying(24) PRIMARY KEY NOT NULL,
+    "bounds" geometry(Polygon,4326) NOT NULL
+);
