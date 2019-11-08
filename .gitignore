@@ -1,1 +1,5 @@
-# ignore config
+.venv/
+
+__pycache__
+
+.pytest_cache/
