@@ -5,11 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"
+importlib-metadata = "*"
 
 [packages]
 psycopg2-binary = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"
 
 [scripts]

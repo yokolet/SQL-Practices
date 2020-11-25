@@ -13,7 +13,7 @@ services:
 
   db: &db
     container_name: "sql_test_db"
-    image: "mdillon/postgis:10"
+    image: "mdillon/postgis:11"
     volumes:
       - "./sql:/sql"
     env_file:
