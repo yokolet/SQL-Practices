@@ -42,14 +42,9 @@ class TestExample(DbTest):
             os.path.join(PATH_TO_SQL_DIR, "organizations.sql")
         )
 
-        sql = """
-        SELECT count(e.customer_organization_id) AS subordinates_count, o.id
-        FROM organizations AS o
-        FULL JOIN enterprise_sales_enterprise_customers AS e
-        ON o.id = e.sales_organization_id
-        GROUP BY o.id
-        ORDER BY o.id;
-        """
+        sql = self.read_file(
+            os.path.join(PATH_TO_SQL_DIR, "practice1.sql")
+        )
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(sql)
             actual = cur.fetchall()
@@ -93,13 +88,9 @@ class TestExample(DbTest):
             os.path.join(PATH_TO_SQL_DIR, "japan_segments.sql")
         )
 
-        sql = """
-        SELECT
-        id,
-        ST_X(ST_Centroid(ST_Transform(bounds, 4326))) AS longitude,
-        ST_Y(ST_Centroid(ST_Transform(bounds, 4326))) AS latitude
-        FROM japan_segments;
-        """
+        sql = self.read_file(
+            os.path.join(PATH_TO_SQL_DIR, "practice2.sql")
+        )
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(sql)
             actual = cur.fetchall()
@@ -165,36 +156,9 @@ class TestExample(DbTest):
             os.path.join(PATH_TO_SQL_DIR, "japan_segments.sql")
         )
 
-        sql = """
-        SELECT id
-        FROM japan_segments
-        WHERE ST_Contains(ST_GeomFromGeoJSON('{
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              130.27313232421875,
-              30.519681272749402
-            ],
-            [
-              131.02020263671875,
-              30.519681272749402
-            ],
-            [
-              131.02020263671875,
-              30.80909017893796
-            ],
-            [
-              130.27313232421875,
-              30.80909017893796
-            ],
-            [
-              130.27313232421875,
-              30.519681272749402
-            ]
-          ]
-        ]}')::geography::geometry, bounds);
-        """
+        sql = self.read_file(
+            os.path.join(PATH_TO_SQL_DIR, "practice3.sql")
+        )
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(sql)
             actual = cur.fetchall()
